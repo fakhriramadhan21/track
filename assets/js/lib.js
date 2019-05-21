@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     $('#newsletter').submit(function () {
         var $this     = $(this),
             $response = $('#response'),
@@ -8,10 +9,7 @@ $(document).ready(function () {
 
         $response.find('p').remove();
 
-        if (!testmail.test($mail.val())) {
-            $response.html('<p class="error">Please enter a valid email</p>');
-            hasError = true;
-        }
+        
 
         if (hasError === false) {
 

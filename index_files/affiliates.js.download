@@ -1,0 +1,408 @@
+!function(e){function n(){}function t(e,n){return function(){e.apply(n,arguments)}}function o(e){if("object"!=typeof this)throw new TypeError("Promises must be constructed via new");if("function"!=typeof e)throw new TypeError("not a function");this._state=0,this._handled=!1,this._value=void 0,this._deferreds=[],s(e,this)}function i(e,n){for(;3===e._state;)e=e._value;return 0===e._state?void e._deferreds.push(n):(e._handled=!0,void o._immediateFn(function(){var t=1===e._state?n.onFulfilled:n.onRejected;if(null===t)return void(1===e._state?r:u)(n.promise,e._value);var o;try{o=t(e._value)}catch(i){return void u(n.promise,i)}r(n.promise,o)}))}function r(e,n){try{if(n===e)throw new TypeError("A promise cannot be resolved with itself.");if(n&&("object"==typeof n||"function"==typeof n)){var i=n.then;if(n instanceof o)return e._state=3,e._value=n,void f(e);if("function"==typeof i)return void s(t(i,n),e)}e._state=1,e._value=n,f(e)}catch(r){u(e,r)}}function u(e,n){e._state=2,e._value=n,f(e)}function f(e){2===e._state&&0===e._deferreds.length&&o._immediateFn(function(){e._handled||o._unhandledRejectionFn(e._value)});for(var n=0,t=e._deferreds.length;n<t;n++)i(e,e._deferreds[n]);e._deferreds=null}function c(e,n,t){this.onFulfilled="function"==typeof e?e:null,this.onRejected="function"==typeof n?n:null,this.promise=t}function s(e,n){var t=!1;try{e(function(e){t||(t=!0,r(n,e))},function(e){t||(t=!0,u(n,e))})}catch(o){if(t)return;t=!0,u(n,o)}}var a=setTimeout;o.prototype["catch"]=function(e){return this.then(null,e)},o.prototype.then=function(e,t){var o=new this.constructor(n);return i(this,new c(e,t,o)),o},o.all=function(e){var n=Array.prototype.slice.call(e);return new o(function(e,t){function o(r,u){try{if(u&&("object"==typeof u||"function"==typeof u)){var f=u.then;if("function"==typeof f)return void f.call(u,function(e){o(r,e)},t)}n[r]=u,0===--i&&e(n)}catch(c){t(c)}}if(0===n.length)return e([]);for(var i=n.length,r=0;r<n.length;r++)o(r,n[r])})},o.resolve=function(e){return e&&"object"==typeof e&&e.constructor===o?e:new o(function(n){n(e)})},o.reject=function(e){return new o(function(n,t){t(e)})},o.race=function(e){return new o(function(n,t){for(var o=0,i=e.length;o<i;o++)e[o].then(n,t)})},o._immediateFn="function"==typeof setImmediate&&function(e){setImmediate(e)}||function(e){a(e,0)},o._unhandledRejectionFn=function(e){"undefined"!=typeof console&&console&&console.warn("Possible Unhandled Promise Rejection:",e)},o._setImmediateFn=function(e){o._immediateFn=e},o._setUnhandledRejectionFn=function(e){o._unhandledRejectionFn=e},"undefined"!=typeof module&&module.exports?module.exports=o:e.Promise||(e.Promise=o)}(this);
+
+!function(a){function b(a,c){c=c||{},this._id=b._generateUUID(),this._promise=c.promise||Promise,this._frameId=c.frameId||"CrossStorageClient-"+this._id,this._origin=b._getOrigin(a),this._requests={},this._connected=!1,this._closed=!1,this._count=0,this._timeout=c.timeout||5e3,this._listener=null,this._installListener();var d;c.frameId&&(d=document.getElementById(c.frameId)),d&&this._poll(),d=d||this._createFrame(a),this._hub=d.contentWindow}b.frameStyle={display:"none",position:"absolute",top:"-999px",left:"-999px"},b._getOrigin=function(a){var b,c,d;return b=document.createElement("a"),b.href=a,b.host||(b=window.location),c=b.protocol&&":"!==b.protocol?b.protocol:window.location.protocol,d=c+"//"+b.host,d=d.replace(/:80$|:443$/,"")},b._generateUUID=function(){return"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,function(a){var b=16*Math.random()|0,c="x"==a?b:3&b|8;return c.toString(16)})},b.prototype.onConnect=function(){var a=this;return this._connected?this._promise.resolve():this._closed?this._promise.reject(new Error("CrossStorageClient has closed")):(this._requests.connect||(this._requests.connect=[]),new this._promise(function(b,c){var d=setTimeout(function(){c(new Error("CrossStorageClient could not connect"))},a._timeout);a._requests.connect.push(function(a){return clearTimeout(d),a?c(a):void b()})}))},b.prototype.set=function(a,b,c){return this._request("set",{key:a,value:b,ttl:c})},b.prototype.get=function(a){var b=Array.prototype.slice.call(arguments);return this._request("get",{keys:b})},b.prototype.del=function(){var a=Array.prototype.slice.call(arguments);return this._request("del",{keys:a})},b.prototype.clear=function(){return this._request("clear")},b.prototype.getKeys=function(){return this._request("getKeys")},b.prototype.close=function(){var a=document.getElementById(this._frameId);a&&a.parentNode.removeChild(a),window.removeEventListener?window.removeEventListener("message",this._listener,!1):window.detachEvent("onmessage",this._listener),this._connected=!1,this._closed=!0},b.prototype._installListener=function(){var a=this;this._listener=function(b){var c,d,e,f;if(!a._closed&&b.data&&"string"==typeof b.data&&(d="null"===b.origin?"file://":b.origin,d===a._origin))if("cross-storage:unavailable"!==b.data){if(b.data.indexOf("cross-storage:")!==-1&&!a._connected){if(a._connected=!0,!a._requests.connect)return;for(c=0;c<a._requests.connect.length;c++)a._requests.connect[c](e);delete a._requests.connect}if("cross-storage:ready"!==b.data){try{f=JSON.parse(b.data)}catch(a){return}f.id&&a._requests[f.id]&&a._requests[f.id](f.error,f.result)}}else{if(a._closed||a.close(),!a._requests.connect)return;for(e=new Error("Closing client. Could not access localStorage in hub."),c=0;c<a._requests.connect.length;c++)a._requests.connect[c](e)}},window.addEventListener?window.addEventListener("message",this._listener,!1):window.attachEvent("onmessage",this._listener)},b.prototype._poll=function(){var a,b,c;a=this,c="file://"===a._origin?"*":a._origin,b=setInterval(function(){return a._connected?clearInterval(b):void(a._hub&&a._hub.postMessage("cross-storage:poll",c))},1e3)},b.prototype._createFrame=function(a){var c,d;c=window.document.createElement("iframe"),c.id=this._frameId;for(d in b.frameStyle)b.frameStyle.hasOwnProperty(d)&&(c.style[d]=b.frameStyle[d]);return window.document.body.appendChild(c),c.src=a,c},b.prototype._request=function(a,b){var c,d;return this._closed?this._promise.reject(new Error("CrossStorageClient has closed")):(d=this,d._count++,c={id:this._id+":"+d._count,method:"cross-storage:"+a,params:b},new this._promise(function(a,b){var e,f,g;e=setTimeout(function(){d._requests[c.id]&&(delete d._requests[c.id],b(new Error("Timeout: could not perform "+c.method)))},d._timeout),d._requests[c.id]=function(c,d){return clearTimeout(e),c?b(new Error(c)):void a(d)},Array.prototype.toJSON&&(f=Array.prototype.toJSON,Array.prototype.toJSON=null),g="file://"===d._origin?"*":d._origin,d._hub.postMessage(JSON.stringify(c),g),f&&(Array.prototype.toJSON=f)}))},"undefined"!=typeof module&&module.exports?module.exports=b:"undefined"!=typeof exports?exports.CrossStorageClient=b:"function"==typeof define&&define.amd?define([],function(){return b}):a.CrossStorageClient=b}(this);
+
+!function(){function t(){var t=0,e=0;this.output="",this.readByte=function(r){return"string"==typeof r&&(r=r.charCodeAt(0)),0>t?e|=r>>-t:e=r<<t&248,t>3?(t-=8,1):(4>t&&(this.output+=i[e>>3],t+=5),0)},this.finish=function(r){var n=this.output+(0>t?i[e>>3]:"")+(r?"$":"");return this.output="",n}}function e(){var t=0,e=0;this.output="",this.readChar=function(r){"string"!=typeof r&&"number"==typeof r&&(r=String.fromCharCode(r)),r=r.toLowerCase();var n=s()[r];"undefined"!=typeof n&&(n<<=3,e|=n>>>t,t+=5,t>=8&&(this.output+=String.fromCharCode(e),t-=8,e=t>0?n<<5-t&255:0))},this.finish=function(e){var r=this.output+(0>t?i[bits>>3]:"")+(e?"$":"");return this.output="",r}}function r(e){var r=new t,n=r.update(e,!0);return n}function n(t){var r=new e,n=r.update(t,!0);return n}function u(t,e){"undefined"==typeof f&&(f=require("crypto"));var n=f.createHash("sha1");if(n.digest=function(t){return function(){return r(t.call(this,"binary"))}}(n.digest),e){if("string"==typeof t||Buffer.isBuffer(t))try{return e(null,u(t))}catch(i){return e(i,null)}return t.on("data",function(t){n.update(t)}),void t.on("end",function(){e(null,n.digest())})}return t?n.update(t).digest():n}var i="0123456789abcdefghjkmnpqrtuvwxyz",o={o:0,i:1,l:1,s:5},s=function(){for(var t={},e=0;e<i.length;e++)t[i[e]]=e;for(var r in o)o.hasOwnProperty(r)&&(t[r]=t[""+o[r]]);return s=function(){return t},t};t.prototype.update=function(t,e){for(var r=0;r<t.length;)r+=this.readByte(t[r]);var n=this.output;return this.output="",e&&(n+=this.finish()),n},e.prototype.update=function(t,e){for(var r=0;r<t.length;r++)this.readChar(t[r]);var n=this.output;return this.output="",e&&(n+=this.finish()),n};var f,a;u.file=function(t,e){return"-"==t?(process.stdin.resume(),u(process.stdin,e)):("undefined"==typeof a&&(a=require("fs")),a.stat(t,function(r,n){return r?e(r,null):n.isDirectory()?e({dir:!0,message:"Is a directory"}):u(require("fs").createReadStream(t),e)}))};var d={Decoder:e,Encoder:t,encode:r,decode:n,sha1:u};"undefined"!=typeof window&&(window.base32=d),"undefined"!=typeof module&&module.exports&&(module.exports=d)}();
+
+var TrackingHelper = (function() {
+    var urlParams = getUrlVars();
+    var p_pid = urlParams["a"];
+    var p_aid = null;
+    var p_gid = null;
+    if((window.location.href).indexOf('/pay/') != -1){
+        var p_urlParams = objToStringP(urlParams, '');
+    }else{
+        var p_urlParams = null;
+    }
+    var p_s = null;
+    var p_sid = urlParams["sid"];
+    var requestBase = '/t/';
+    var baseDomain = 'gazgod.com';
+    var ip;
+    var affiliateUsername = '';
+    var defaultAffiliateID = "-1";
+    var impression_landing = 1;
+    var impression_optin = 2;
+    var impression_webinar = 3;
+    var impression_checkout = 4;
+    var impression_xurli = 5;
+    var impression_high_end_training = 6;
+    var on_complete_function = null;
+    var redirect_in_progress = false;
+
+    function I(impressionparm, landingid, product,user_id,reff) {
+        return new Promise(function (resolve, reject) {
+            $(function () {
+                try {
+                    p_s = new CrossStorageClient('https://' + baseDomain + requestBase + 'xds/v0.2' + window.base32.encode(baseDomain), {timeout: 10000});
+
+                    p_s.onConnect().then(function () {
+                        return p_s.get('p_aid');
+                    }).then(function (val) {
+                        if (typeof(val) == 'number') {
+                            p_aid = val;
+                        }
+                    }).then(function () {
+                        return p_s.get('p_urlParams');
+                    }).then(function (val) {
+                        console.log(val);
+                        if (val != null && val.indexOf('a=') != -1) {
+                            p_urlParams = val;
+                        }
+                    }).then(function () {
+                        return p_s.get('p_sid');
+                    }).then(function (val) {
+                        if (typeof(val) == 'number' || typeof(val) == 'string') {
+                            p_sid = val;
+                        }
+                    }).then(function() {
+                        return Z(impressionparm, landingid, product,user_id,reff);
+                    }).then(function() {
+                        resolve();
+                    }).catch(function(err) {
+                        // Handle error
+                        console.log(err);
+                    });
+                } catch(e) { console.log(e); }
+            });
+        });
+    }
+
+    function Z(impressionparm, landingid, product,user_id,reff) {
+        return new Promise(function (resolve, reject) {
+            p_s.onConnect().then(function () {
+                return p_s.get('p_gid');
+            }).then(function (val) {
+                if (typeof(val) !== 'string') {
+                    p_gid = U();
+                    return p_s.set('p_gid', p_gid);
+                } else {
+                    p_gid = val;
+                    return new Promise(function (res, rej) {
+                        res();
+                    });
+                }
+            }).then(function () {
+                return AV(impressionparm, landingid, product,user_id,reff);
+            }).then(function () {
+                resolve();
+            });
+        });
+    }
+
+    function objToStringP (obj, start) {
+        var str = start;
+        for (var p in obj) {
+            if (obj.hasOwnProperty(p)) {
+                if (str !== start) {
+                   str += '&';
+                }
+                str += p + '=' + obj[p].replace(/((\{|\%7B).+(\}|%7D))/gi, '');
+            }
+        }
+        return str;
+    }
+
+    function objToString (obj) {
+        return objToStringP(obj, '?');
+    }
+
+    function G(selectors, impressionparm, landingid, product,user_id,reff) {
+        I(impressionparm, landingid, product,user_id,reff).then(function() {
+            var gid = "<input type='hidden' name='p_gid' value='" + p_gid + "' />";
+            var aid = "<input type='hidden' name='p_aid' value='" + p_aid + "' />";
+            var sid = "<input type='hidden' name='p_sid' value='" + p_sid + "' />";
+            var affiliate = "<input type='hidden' name='affiliate' value='" + affiliateUsername + "' />";
+            var imp = "<input type='hidden' name='impression_type' value='" + impressionparm + "' />";
+            var lid = "<input type='hidden' name='landing_id' value='" + landingid + "' />";
+            $(selectors).each(function(int,el){
+                $(el).append(gid + aid + sid + affiliate + imp + lid);
+            });
+        });
+    }
+
+    function M(formid, impressionparm, landingid, product) {
+        G('#' + formid, impressionparm, landingid, product);
+    }
+
+    function UP(impressionparm, landingid, product) {
+        I(impressionparm, landingid, product);
+    }
+
+    function T(oid, impressionparm, landingid, product) {
+        I(impressionparm, landingid, product);
+    }
+
+    function TP(data) {
+        return new Promise(function (resolve, reject) {
+            var races = [];
+            if (typeof data.pixels !== 'undefined') {
+                for (var i=0;i < data.pixels.length; i++) {
+                  races.push(new Promise(function(resolve, reject) {
+                        var img = new Image();
+                        img.onload = function(){
+                            //FB does a HTTP redirect, we want to give the system enough time to allow for that redirect too
+                            setTimeout(resolve, 500);
+                        };
+                        img.src = data.pixels[i];
+                        setTimeout(resolve, 5000);
+                    }));
+                }
+            }
+            if (races.length === 0) {
+                resolve();
+                return;
+            }
+            Promise.race(races).then(resolve);
+        });
+    }
+
+    function AV(impressionparm, landingid, product,user_id,reff) {
+        return new Promise(function(resolve, reject) {
+            var success = function(data) {
+                if (data && data.result) {
+                    if((window.location.href).indexOf('/pay/') != -1){
+                        p_aid = data.p_aid;
+                        p_urlParams = data.p_urlparams;
+                    }else{
+                        if(p_aid == null){
+                            p_aid = data.p_aid;
+                        }
+                        console.log('p_urlParams:1'+ p_urlParams);
+                        if(p_urlParams == null){
+                            p_urlParams = data.p_urlparams;
+                        }
+                    }
+                    console.log('p_urlParams:2'+ p_urlParams);
+                    affiliateUsername = data.affiliateUsername;
+                    p_s.set('p_aid', p_aid);
+                    p_s.set('p_urlParams', p_urlParams);
+                    p_s.set('p_sid', data.p_sid);
+                    try {
+                        var p_urlParams_d;
+                        if (typeof(p_urlParams) !== 'undefined') {
+                             console.log('coming Here1');
+                            p_urlParams_d = getUrlVarsByValue('?' + p_urlParams);
+                            
+                        }
+                        if ((typeof(p_pid) === 'undefined' && data.p_aid != p_pid && data.p_aid != defaultAffiliateID) ||
+                            (typeof(p_urlParams) !== 'undefined' && typeof(urlParams['utm_source']) === 'undefined' && typeof(p_urlParams_d['utm_source']) !== 'undefined')) {
+                            console.log('coming Here');
+                            redirect_in_progress = true;
+                            window.location.search = objToStringP(mergeGetVarsByValues('?' + p_urlParams, urlParams), '?');
+                            resolve();
+                        }
+                        if(p_aid != null && p_aid != data.p_aid && data.p_aid != defaultAffiliateID && (window.location.href).indexOf('/pay/') == -1){
+                            redirect_in_progress = true;
+                            window.location.search = objToStringP(mergeGetVarsByValues('?' + p_urlParams, urlParams), '?');
+                            resolve();
+                        }
+
+                        var search = replaceBrackets(window.location.search);
+                        if (window.location.search !== "" && search !== window.location.search) {
+                            window.location.search = search;
+                        }
+                    } catch(e) {
+                        console.log(e);
+                    }
+                    TP(data);
+                    TI(impressionparm, landingid, product,user_id,reff).then(resolve());
+                } else {
+                    reject();
+                }
+            };
+            var failure = function(data, message, something) {
+                reject();
+            };
+            return $.ajax({
+                method: "GET",
+                url: 'https://' + baseDomain + requestBase + 'av',
+                dataType: "jsonp",
+                timeout: 10000,
+                jsonpCallback: 'thecallback',
+                crossDomain: true,
+                data: {
+                    A: 'AV',
+                    p_pid: p_pid,
+                    p_gid: p_gid,
+                    p_aid: p_aid,
+                    p_sid: p_sid,
+                    p_urlParams: objToStringP(urlParams, ''),
+                    impressionparm: impressionparm,
+                    PID: product,
+                    LID: landingid
+                }
+            }).then(success, failure);
+        });
+    }
+
+    function TI(impressionparm, landingid, product,user_id,reff) {
+        return new Promise(function(resolve, reject) {
+            var success = function(data) {
+                if (!redirect_in_progress) {
+                    if (typeof on_complete_function === 'function') {
+                        on_complete_function();
+                    }
+                }
+                resolve();
+            };
+            var failure = function() {
+                reject();
+            };
+            return $.ajax({
+                method: "GET",
+                url: 'https://' + baseDomain + requestBase + 'ti',
+                dataTpe: "jsonp",
+                timeout: 10000,
+                jsonpCallback: 'thecallback',
+                crossDomain: true,
+                data: {
+                    p_gid: p_gid,
+                    IMP: impressionparm,
+                    LID: landingid,
+                    PID: product,
+                    user_id: user_id,
+                    reff: reff
+                }
+            }).then(success, failure);
+        });
+    }
+
+    function getAffiliateUsername() {
+        return affiliateUsername;
+    }
+
+    //UUIDv4
+    function U(){
+        var uuid = "", i, random;
+        for (i = 0; i < 32; i++) {
+            random = Math.random() * 16 | 0;
+
+            if (i == 8 || i == 12 || i == 16 || i == 20) {
+                uuid += "-"
+            }
+            uuid += (i == 12 ? 4 : (i == 16 ? (random & 3 | 8) : random)).toString(16);
+        }
+        return uuid;
+    }
+
+    function replaceBrackets(url) {
+        var vars = [];
+        url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars.push(key + '=' + value.replace(/((\{|\%7B).+(\}|%7D))/gi, ''));
+        });
+        return '?' + vars.join('&');
+    }
+
+    function mergeGetVarsByValues(value, vars) {
+        var parts = value.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+            function(m,key,value) {
+                vars[key] = value.replace(/((\{|\%7B).+(\}|%7D))/gi, '');
+            });
+        return vars;
+    }
+
+    function getUrlVarsByValue(value) {
+        var vars = [];
+        var parts = value.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+            function(m,key,value) {
+                vars[key] = value.replace(/((\{|\%7B).+(\}|%7D))/gi, '');
+            });
+        return vars;
+    }
+
+    function getUrlVars() {
+        return getUrlVarsByValue(window.location.search);
+    }
+
+    function S(s) {
+        baseDomain = s;
+    }
+
+    function setCompleteFunction(func) {
+        on_complete_function = func;
+    }
+
+    function ShowStatus() {
+        return new Promise(function(resolve, reject) {
+            var success = function(data) {
+                if (data && data.result) {
+                    console.log(data);
+                    var el = '<div>You are being tracked with affiliate id <strong>' + data.p_aid + '</strong> (Affiliate User: <strong>' + data.affiliateUsername  + '</strong>).</div><br/>';
+
+                    if (data.lifetime_optin) {
+                        el += '<div>Your tracking cookie is currently <strong>locked</strong> to this affiliate.</div>';
+                    }
+
+                    $('.pleasewait').hide();
+                    $('body').append(el);
+                    resolve();
+                } else {
+                    var el = 'No tracking details found.';
+
+                    $('.pleasewait').hide();
+                    $('body').append(el);
+                    resolve();
+                }
+            };
+            var failure = function(data, message, something) {
+                reject();
+            };
+            return $.ajax({
+                method: "GET",
+                url: 'https://' + baseDomain + requestBase + 'slos/fetch',
+                dataType: "jsonp",
+                timeout: 10000,
+                jsonpCallback: 'thecallback',
+                crossDomain: true,
+                data: {
+                    p_gid: p_gid,
+                }
+            }).then(success, failure);
+        });
+    }
+
+    function SLOS() {
+        return new Promise(function (resolve, reject) {
+            $(function () {
+                try {
+                    p_s = new CrossStorageClient('https://' + baseDomain + requestBase + 'xds/v0.1d' + window.base32.encode(baseDomain), {timeout: 10000});
+
+                    p_s.onConnect().then(function () {
+                        return p_s.get('p_gid');
+                    }).then(function (val) {
+                        if (typeof(val) !== 'string') {
+                            resolve();
+                        } else {
+                            p_gid = val;
+                            return new Promise(function (res, rej) {
+                                res();
+                            });
+                        }
+                    }).then(function () {
+                        return ShowStatus();
+                    }).then(function () {
+                        resolve();
+                    });
+                } catch(e) { console.log(e); }
+            });
+        });
+    }
+
+    return {
+        SLOS: SLOS,
+        TP: TP,
+        UP: UP,
+        G: G,
+        M: M,
+        getAffiliateUsername: getAffiliateUsername,
+        impression_landing: impression_landing,
+        impression_optin: impression_optin,
+        impression_webinar: impression_webinar,
+        impression_checkout: impression_checkout,
+        impression_xurli: impression_xurli,
+        impression_high_end_training : impression_high_end_training,
+        S: S,
+        OC: setCompleteFunction
+    };
+})();

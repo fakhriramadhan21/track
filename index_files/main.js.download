@@ -1,0 +1,11 @@
+// Landing Pace Specific
+$('.evergreen-cta-btn').hover(function () {
+    $(this).toggleClass('animated');
+})
+setTimeout(function(){ 
+    $('.webinar_getstarted_section').show(); 
+    }, 900000);
+
+
+
+

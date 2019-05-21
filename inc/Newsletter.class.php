@@ -19,10 +19,6 @@ class Newsletter
                 $status  = "error";
                 $message = "The email address field must not be blank";
                 self::$valid = false;
-            } else if (!filter_var(self::$email, FILTER_VALIDATE_EMAIL)) {
-                $status  = "error";
-                $message = "You must fill the field with a valid email address";
-                self::$valid = false;
             }
 
             if (self::$valid) {
@@ -32,7 +28,7 @@ class Newsletter
                 $existingSignup->execute();
                 $data_exists = ($existingSignup->fetchColumn() > 0) ? true : false;
 
-                if (!$data_exists) {
+                // if (!$data_exists) {
                     $sql = "INSERT INTO signups (signup_email_address, signup_date) VALUES (:email, :datetime)";
                     $q = $pdo->prepare($sql);
 
@@ -42,14 +38,15 @@ class Newsletter
                     if ($q) {
                         $status  = "success";
                         $message = "You have been successfully subscribed";
+                        header('Location: ' . $_SERVER['HTTP_REFERER']);
                     } else {
                         $status  = "error";
                         $message = "An error occurred, please try again";
                     }
-                } else {
-                    $status  = "error";
-                    $message = "This email is already subscribed";
-                }
+                // } else {
+                //     $status  = "error";
+                //     $message = "This email is already subscribed";
+                // }
             }
 
             $data = array(

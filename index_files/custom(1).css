@@ -1,0 +1,347 @@
+
+/*Header*/
+body { background: #e7eff7; }
+.header {border-bottom: 1px solid #c0c0c0;}
+.skin-josh .navbar { border-bottom:0;}
+.skin-josh .logo {background-color: transparent;}
+
+body > .header, .skin-josh .navbar {
+  background: #e2e2e2; /* Old browsers */
+  background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
+}
+
+/*Main Color Properties ---------------------------------------*/
+
+/*Background Color*/
+.sidebar-toggle, .panel-primary > .panel-heading,
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header, .global-stat-row h4 {
+  background-color: #337ab7 !important;
+}
+
+/* Font Color Changes*/
+.lesson h4, .dataTable .campaign, .form-group label, .gbox h3, i.boxicon, .sfc, .profile_label, .timeline-title, .page-sidebar .page-sidebar-menu .sub-menu  li.active > a,  .alert-message-info h4, .checkoutInfo .modBox h4 {
+  color: #337ab7 !important;
+}
+
+/*Side Panel Toggle Button*/
+.sidebar-toggle{
+   border-radius: 4px 4px 4px 4px !important;
+  -moz-border-radius: 4px 4px 4px 4px !important;
+  -webkit-border-radius: 4px 4px 4px 4px !important;
+}
+
+/*Alert Messages*/
+.alert-message-info {border-left: 3px solid #337ab7 !important; background-color:#f9f9f9 !important; margin-top:0 !important;}
+
+
+
+/*Form Customizations*/
+.form-group label {font-weight:normal;}
+
+/*Navigation Elements ----------------------------------------*/
+
+.header-nav {
+  float: left;
+  margin: 7px 12px 0 0;
+}
+
+.navbar-right {
+    margin-top: 8px !important;
+}
+
+.progress-bar-info {
+  background-color: #999;
+}
+
+
+/*Main Content Elements----------------------------------------*/
+
+/*Page Content Headers*/
+.student .content-header {
+  margin-bottom:0 !important;
+}
+
+.point {
+  margin:0 auto;
+  text-align:center;
+  margin-top:-3px;
+  margin-bottom:20px;
+  height:19px;
+  overflow:hidden;
+}
+
+/*Panels*/
+.panel-primary > .panel-heading {
+    border-color: #1b5f99;
+}
+
+.skin-josh .right-side > .content-header h1 {
+    color: #777;
+    font-size: 20px;
+    line-height:1.7em !important;
+}
+
+/*Left Side Panel Nav ----------------------------------------------*/
+
+.left-side .sidebar .page-sidebar-menu > li > ul > li {
+    border-bottom: 1px solid #b0b0b0 !important;
+    border-top: 1px solid #e0e0e0 !important;
+}
+
+.left-side .sidebar .page-sidebar-menu > li > ul > li > a {
+  color:#555 !important;
+  -webkit-box-shadow: inset -9px 0px 10px -10px rgba(0,0,0,0.4) !important;
+  -moz-box-shadow: inset -9px 0px 10px -10px rgba(0,0,0,0.4) !important;
+  box-shadow: inset -9px 0px 10px -10px rgba(0,0,0,0.4) !important;
+}
+
+.left-side .sidebar .page-sidebar-menu > li > ul {
+    background-color:#d0d0d0 !important;
+      border-top-color:#1b5f99 !important;
+
+}
+
+.page-sidebar .page-sidebar-menu .sub-menu  li.active > a {
+    background-color:#d0d0d0 !important;
+    font-weight:bold !important;
+     background:#e0e0e0 !important;
+
+}
+
+.page-sidebar .page-sidebar-menu .sub-menu  li > a:hover {
+   background:#e0e0e0 !important;
+}
+
+
+.skin-josh .sidebar li ul {
+    background: #404040;
+    border-top: 0.08em solid #666;
+}
+
+.left-side .active {
+    background: #337ab7 !important;
+}
+.left-side .active a {
+    color: #fff !important;
+}
+
+.right-side > .content-header {
+    min-height: 46px !important;
+    padding: 5px 15px !important;
+}
+
+
+/*Side Nav*/
+.left-side {
+  background-color:#f0f0f0  !important;
+  border-right: 0px !important;
+  -webkit-box-shadow: inset -9px 0px 10px -10px rgba(0,0,0,0.4) !important;
+    -moz-box-shadow: inset -9px 0px 10px -10px rgba(0,0,0,0.4) !important;
+    box-shadow: inset -9px 0px 10px -10px rgba(0,0,0,0.4) !important;
+}
+.sidebar-nav {
+  background: transparent !important;
+}
+
+.panel-corner {
+  display:none !important;
+}
+.skin-josh .sidebar a {color: #fff;}
+.skin-josh .sidebar .page-sidebar-menu > li {
+    border-bottom: 1px solid #d0d0d0 !important;
+    border-top: 1px solid #fff !important;
+}
+
+
+.sidebar a {
+    color: #666 !important;
+    font-family: Lato, sans-serif; !important
+    -webkit-font-smoothing: antialiased !important;
+    text-decoration: none !important;
+    -webkit-box-shadow: inset 0px 0px 0px 0px !important;
+    -moz-box-shadow:  inset 0px 0px 0px 0px !important;
+    box-shadow:  inset 0px 0px 0px 0px !important;
+}
+
+.sidebar a:hover {
+  background-color:#d9d9d9 !important;
+}
+
+.sidebar li.active a:hover  {
+   background: #2a6496 !important;
+}
+
+/*Left Header Nav*/
+.navbar-left {
+  margin-top:6px !important;
+}
+
+/*Right Header Nav*/
+.navbar-right {
+  margin-right:8px  !important
+}
+
+.user-menu a {
+   border-radius: 4px 4px 4px 4px;
+  -moz-border-radius: 4px 4px 4px 4px;
+  -webkit-border-radius: 4px 4px 4px 4px;
+}
+
+.navbar-left button.button {
+    border-right: 1px solid #9ec4e3 !important;
+}
+
+/*Buttons Elements ---------------------------------------------*/
+.button-primary, .infusion-submit button, .course_list .dd-handle.active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3d88c8), color-stop(100%, #2a6496)) !important;
+  background: -webkit-linear-gradient(top, #3d88c8, #2a6496) !important;
+  background: -moz-linear-gradient(top, #3d88c8, #2a6496) !important;
+  background: -o-linear-gradient(top, #3d88c8, #2a6496) !important;
+  background: linear-gradient(top, #3d88c8, #2a6496) !important;
+  background-color: #00a1cb !important;
+  border-color: #2a6496 !important;
+  border-right:1px solid #4c97d8 !important;
+  color: white !important;
+  text-shadow: 0 -1px 1px rgba(0, 40, 50, 0.35) !important;
+}
+
+/* line 234, ../scss/partials/_buttons.scss */
+.button-primary:hover, .button-primary:focus, .infusion-submit button:hover, .infusion-submit button:focus {
+  background-color: #4a98db!important;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4a98db), color-stop(100%, #2a6496))!important;
+  background: -webkit-linear-gradient(top, #4a98db, #2a6496)!important;
+  background: -moz-linear-gradient(top, #4a98db, #2a6496) !important;
+  background: -o-linear-gradient(top, #4a98db, #2a6496) !important;
+  background: linear-gradient(top, #4a98db, #2a6496) !important;
+}
+
+/* line 238, ../scss/partials/_buttons.scss */
+.button-primary:active, .infusion-submit button:active {
+  background: #2a6496 !important;
+  color: #fff !important;
+}
+
+
+/*User Dropdown Menu -----------------------------------------*/
+
+.navbar .nav a {
+    border: 1px solid #b0b0b0 !important;
+    background: #d8d8d8; /* Old browsers */
+    background: -moz-linear-gradient(top,  #d8d8d8 0%, #afafaf 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #d8d8d8 0%,#afafaf 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #d8d8d8 0%,#afafaf 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8d8d8', endColorstr='#afafaf',GradientType=0 ); /* IE6-9 */
+    margin-top: 6px !important;
+    padding: 2px 7px !important;
+    color: #333 !important;
+}
+
+.navbar-right .nav .open > a:hover,
+.navbar-right .nav .open > a:focus,
+.navbar-right .nav > li > a:hover,
+.navbar-right .nav > li > a:focus {
+    border: 1px solid #999 !important;
+    background: #858585; /* Old browsers */
+    background: -moz-linear-gradient(top,  #858585 0%, #d8d8d8 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #858585 0%,#d8d8d8 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #858585 0%,#d8d8d8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#858585', endColorstr='#d8d8d8',GradientType=0 ); /* IE6-9 */
+    margin-top: 6px !important;
+    padding: 2px 7px !important;
+    color: #333 !important;
+}
+
+.navbar .navbar-right > .nav {
+    margin-right: 0px !important;
+}
+
+.dropdown-toggle .img-circle {
+  width:27px !important;
+  height:27px !important;
+  border:1px solid #888;
+  margin-top:2px;
+}
+
+.navbar .nav ul.dropdown-menu li a {
+  border:0px !important;
+  background:transparent !important;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu > li.user-footer {
+    padding: 7px 0;
+}
+
+.gaz-dashboard-footer img {margin: 0 auto;width: 100%;display: block;max-width: 1037px;text-align: center;}
+
+
+/*Appointment Calendar -----------------------------------------*/
+#bookingWidget td.day {
+    font-weight: bold;
+    font-size: 16px;
+    color: #3276b1;
+}
+
+div#bookingWidget td.day.disabled {
+    font-weight: 100;
+    font-size: 14px;
+    color: gray;
+}
+div#bookingWidget td.day.active {
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+}
+
+
+
+/*Responsive Actions -----------------------------------------*/
+@media (max-width: 1210px) {
+  .header-nav, .navbar-left {
+    display: none !important;
+  }
+
+
+}
+
+@media (max-width: 530px) {
+    .navbar-right {
+      display: none !important;
+    }
+}
+
+@media (max-width: 650px) {
+  .logo img {
+    width:300px;
+  }
+  .logo {
+    top:8px !important;
+    left:67px !important;
+  }
+  #DIV_1 {
+    padding-top:20px !important;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  body > .header {
+    /*position:static !important;*/
+  }
+  body > .header .logo {
+    position: absolute !important;
+    width:300px;
+  }
+
+}
+
+
+
+
+/*@media (min-width: 992px) and (max-width: 1199px) {
+  .hidden-md {
+    display: none !important;
+  }
+}*/
+

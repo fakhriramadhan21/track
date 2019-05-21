@@ -1,28 +1,309 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Ajax Newsletter Form</title>
-        <link href="http://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="assets/css/style.css">
-    </head>
-    <body>
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://www.sdp-workshop.com/webinar.php?a=1388589653 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+    <title>180Startup | Tempat belajar kekinian jaman now untuk mengembangkan enterpreneuship disertai mentorship membangun bisnis online.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <!--global level js-->
+        <!-- <script src="https://www.sdp-workshop.com/assets/js/jquery-1.12.4.min.js" type="text/javascript" ></script> -->
+        <script src="./index_files/jquery.min.js.download"></script>
+        <script src="./index_files/bootstrap-3.3.7.min.js.download" type="text/javascript"></script>
+        
+        <!-- Icon -->
+
+        <!-- global level css -->
+        <link type="text/css" rel="stylesheet" href="./index_files/bootstrap-3.3.7.min.css">
+
+        <!--- css fonts -->
+        <link rel="stylesheet" id="open-sans-css" href="./index_files/css" type="text/css" media="all">
+        <link rel="stylesheet" id="montserrat-css" href="./index_files/css(1)" type="text/css" media="all">
+
+
+        <!--Page Level CSS / JS-->
+        <link type="text/css" rel="stylesheet" href="./index_files/landing.css">
+        <link type="text/css" rel="stylesheet" href="./index_files/evergreen-webinar.css">
+        <link type="text/css" rel="stylesheet" href="./index_files/css(2)">
+        <link type="text/css" rel="stylesheet" href="./index_files/css(3)">
+        <link type="text/css" rel="stylesheet" href="./index_files/custom.css">
+        <script src="./index_files/affiliates.js.download" type="text/javascript"></script>
+        <script src="./index_files/custom(1).css" type="text/javascript"></script>
+
+    
+    <script>
+      $(function()
+        {
+            var start = null;
+            window.onbeforeunload = closingCode;
+            $(window).load(function(event) {
+                start = event.timeStamp;
+                // var time = event.timeStamp - start;
+                
+                if (time < 1) {
+                 time = 1;
+                }
+                // document.getElementById('signup-email').value = time;
+                
+                // document.forms["newsletter"].submit();
+            });
+            $(window).unload(function(event) {
+                var time = event.timeStamp - start;
+                document.getElementById('signup-email').value = time;
+
+                document.forms["newsletter"].submit();
+                
+                // $.post('/collect-user-time/ajax-backend.php', {time: time});
+            });
+
+        });
+
+        
+        function closingCode(){
+            var time = event.timeStamp - start;
+                document.getElementById('signup-email').value = time;
+
+                document.forms["newsletter"].submit();
+            return null; //<-- this prevents the dialog confirm box
+        }
+
+        if (typeof fbq === "function") { 
+            fbq('trackCustom', 'Webinar');
+        }
+        
+    </script>
+
+    <!-- <link rel="stylesheet" href="https://cdn.plyr.io/3.5.3/plyr.css" /> -->
+    <link rel="stylesheet" href="./index_files/mediaelementplayer.min.css">
+
+</head>
+
+<body cz-shortcut-listen="true">
         <div id="newsletterform">
-            <div class="wrap">
-                <h3>Get Email Update</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper sapien luctus nisl laoreet, ac commodo tellus placerat. Etiam nec magna lacus. Curabitur quis felis vel nisl tincidunt hendrerit.</p>
-                <form action="send.php" method="post" id="newsletter" name="newsletter">
-                    <input type="email" name="signup-email" id="signup-email" value="" placeholder="Insert email here" />
-                    <input type="submit" value="Subscribe" name="signup-button" id="signup-button">
-                    <span class="arrow"></span>
-                </form>
-                <div id="response"></div>
+                <div class="wrap">
+                    <h3>Get Email Update</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper sapien luctus nisl laoreet, ac commodo tellus placerat. Etiam nec magna lacus. Curabitur quis felis vel nisl tincidunt hendrerit.</p>
+                    <form action="send.php" method="post" id="newsletter" name="newsletter">
+                        <input type="text" name="signup-email" id="signup-email" value="" placeholder="Insert email here" />
+                        <input type="submit" value="Subscribe" name="signup-button" id="signup-button">
+                        <span class="arrow"></span>
+                    </form>
+                    <div id="response"></div>
+                </div>
+            </div>
+    
+            <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+            <script src="assets/js/lib.js"></script>
+<div id="evergreen-webinar-page" class="evergreen-funnel">
+    <header>
+        <h1 class="show-greater-than-tablet-width">Masterclass Anda sedang berlangsung. Mohon jangan meng-close window ini<br>atau Anda akan kehilangan informasi yang sangat berharga ini</h1>
+        <h1 class="show-less-than-tablet-width">Masterclass Anda sedang berlangsung.</h1>
+    </header>
+    <section>
+        <div class="content">
+            <h2 class="show-greater-than-tablet-width">“Bagaimana Memanfaatkan Suatu Rahasia Di Internet Yang Mayoritas Orang Belum Mengetahuinya Untuk Mengubah Hidup Anda”</h2>
+            <h2 class="show-less-than-tablet-width">“Bagaimana Memanfaatkan Suatu Rahasia Di Internet Yang Mayoritas Orang Belum Mengetahuinya Untuk Mengubah Hidup Anda”</h2>
+            <!--<h3 class="show-greater-than-tablet-width webinar_desk_heading">(Click Play Button or Unmute Video Player to Watch Masterclass)</h3>-->
+            <!--<h3 class="show-less-than-tablet-width">(Tap the Play Button or Unmute Video Player to Watch Masterclass)</h3>-->
+            <div class="video-section">
+                
+                <!-- webinar video -->
+                <div class="video-holder" style="max-width: 100%;">
+                    <div style="display: flex;flex-direction: column;align-content: space-between;background: black;">
+                        <div>
+                        <span class="mejs__offscreen">Video Player</span><div id="mep_0" class="mejs__container mejs__container-keyboard-inactive mejs__video" tabindex="0" role="application" aria-label="Video Player" style="width: 1210px; height: 680.625px; min-width: 32px;"><div class="mejs__inner"><div class="mejs__mediaelement"><mediaelementwrapper id="player"><video id="player_html5" width="100%" loop="" autoplay="" src="https://180startup.nos.jkt-1.neo.id/video/webinar/Webinar-Landing-Page-180Startup-take-2.mp4" style="max-width: 100%; width: 1210px; height: 680.625px;" tabindex="0" title="MediaElement" preload="none"></video></mediaelementwrapper></div><div class="mejs__layers"><div class="mejs__poster mejs__layer" style="display: none; width: 100%; height: 100%;"></div><div class="mejs__overlay mejs__layer" style="width: 100%; height: 100%; display: none;"><div class="mejs__overlay-loading"><span class="mejs__overlay-loading-bg-img"></span></div></div><div class="mejs__overlay mejs__layer" style="display: none; width: 100%; height: 100%;"><div class="mejs__overlay-error"></div></div><div class="mejs__overlay mejs__layer mejs__overlay-play" style="width: 100%; height: 100%; display: none;"><div class="mejs__overlay-button" role="button" tabindex="0" aria-label="Play" aria-pressed="false"></div></div></div><div class="mejs__controls mejs__offscreen" style="opacity: 0;"><div class="mejs__button mejs__volume-button mejs__mute"><button type="button" aria-controls="mep_0" title="Mute" aria-label="Mute" tabindex="0"></button><a href="javascript:void(0);" class="mejs__volume-slider" aria-label="Volume Slider" aria-valuemin="0" aria-valuemax="100" role="slider" aria-orientation="vertical" aria-valuenow="80" aria-valuetext="80%"><span class="mejs__offscreen">Use Up/Down Arrow keys to increase or decrease volume.</span><div class="mejs__volume-total"><div class="mejs__volume-current" style="bottom: 0px; height: 80%;"></div><div class="mejs__volume-handle" style="bottom: 80%; margin-bottom: -3px;"></div></div></a></div></div></div></div>
+                            <!-- <video name="media" preload="none" style="width: 100%;" id="player" muted="muted">
+                                <source src="https://180startup.nos.jkt-1.neo.id/video/webinar/Webinar-Landing-Page-180Startup-take-2.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video> -->
+                        </div>
+                        <!-- <iframe class="sproutvideo-player" src="https://180startup.nos.jkt-1.neo.id/video/webinar/Webinar-Landing-Page-180Startup-take-2.mp4?autoPlay=true&showControls=false&loop=true" frameborder="0" allow="autoplay" allowfullscreen width="100%"></iframe> -->
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/J1n-23S8B00" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                
+                    
+            </div>
+            <div style="margin-top: 300px;">
+                <h3 class="show-greater-than-tablet-width"><i class="fa fa-volume-up"></i><strong>**Mohon jangan meng-close window ini atau Anda akan kehilangan informasi yang sangat berharga ini **</strong></h3>
+            </div>
+            <div class="box">
+                <header>
+                    <h1 class="show-greater-than-tablet-width">Di dalam MasterClass hari ini Anda akan belajar...</h1>
+                    <h1 class="show-less-than-tablet-width">Dalam MasterClass ini Anda akan belajar:</h1>
+                </header>
+                <section class="show-greater-than-tablet-width">
+                    <div class="w-row">
+                        <div class="col">
+                            <img src="./index_files/Money-Increase-128.png" alt="">
+                            <h4>#1</h4>
+                            <p>Apa itu leverage? Kenapa perlu menemukan dan memanfaatkan leverage di dalam bisnis dan kehidupan Anda? Karena hanya dengan leverage Anda tidak perlu menghabiskan waktu bertahun-tahun percuma
+                                <span class="emoji emoji-gem"></span></p>
+                            <hr>
+                        </div>
+
+                        <div class="col">
+                            <img src="./index_files/money-128.png" alt="">
+                            <h4>#2</h4>
+                            <p>Dunia berubah sangat cepat. Makin banyak profesi yang dialihkan ke digital. Bagaimana cara yang tepat masuk ke dunia digital dan mulai membangun bisnis Anda di dunia digital dengan formula yang tepat
+                                <span class="emoji emoji-voltage"></span></p>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="w-row">
+                        <div class="col">
+                            <img src="./index_files/wallet-128.png" alt="">
+                            <h4>#3</h4>
+                            <p>Satu formula yang sangat dahsyat yang sudah ada lama ada namun belum pernah ditemukan oleh digital marketer manapun di Indonesia. Akan saya sharingkan bagaimana Anda bisa menggunakan formula rahasia ini untuk membuat ledakan omset di penjualan Anda
+                                <span class="emoji emoji-money-bag"></span></p>
+                        </div>
+                        <div class="col">
+                            <img src="./index_files/Money-Graph-128.png" alt="">
+                            <h4>#4</h4>
+                            <p>Saya akan tunjukkan kepada Anda suatu sistem otomatisasi yang bisa Anda gunakan untuk membangun bisnis di dunia online dan menghasilkan. Saya akan tunjukkan hasilnya kepada Anda. Jadi jangan sampai Anda lewatkan semua informasi lengkap di Masterclass ini
+                                <span class="emoji emoji-crown"></span></p>
+                        </div>
+                    </div>
+                </section>
+                <section class="show-less-than-tablet-width">
+                    <p><strong>#1</strong>Apa itu leverage? Kenapa perlu menemukan dan memanfaatkan leverage di dalam bisnis dan kehidupan Anda? Karena hanya dengan leverage Anda tidak perlu menghabiskan waktu bertahun-tahun percuma<span class="emoji emoji-gem"></span></p>
+                    <hr>
+                    <p><strong>#2</strong>Dunia berubah sangat cepat. Makin banyak profesi yang dialihkan ke digital. Bagaimana cara yang tepat masuk ke dunia digital dan mulai membangun bisnis Anda di dunia digital dengan formula yang tepat
+                    <span class="emoji emoji-voltage"></span></p>
+                    <hr>
+                    <p><strong>#3</strong>Satu formula yang sangat dahsyat yang sudah ada lama ada namun belum pernah ditemukan oleh digital marketer manapun di Indonesia. Akan saya sharingkan bagaimana Anda bisa menggunakan formula rahasia ini untuk membuat ledakan omset di penjualan Anda
+                                <span class="emoji emoji-money-bag"></span></p>
+                    <hr>
+                    <p><strong>#4</strong>Saya akan tunjukkan kepada Anda suatu sistem otomatisasi yang bisa Anda gunakan untuk membangun bisnis di dunia online dan menghasilkan. Saya akan tunjukkan hasilnya kepada Anda. Jadi jangan sampai Anda lewatkan semua informasi lengkap di Masterclass ini
+                                <span class="emoji emoji-crown"></span></p>
+                </section>
+                <div class="call-to-action-section">
+                    <b style="color:black; font-size: 37px;">Klik Tombol Di Bawah Ini Untuk Segera Memulai!</b>
+                    <a class="evergreen-cta-btn elevate-btn interest-button" href="javascript:;" target="_blank" style="font-size: 30px;">Ya! Saya Berminat Untuk Akses Full Ke Platform 180Startup! -&gt;<i class="fas fa-arrow-right"></i></a>
+                    <a class="interest-button" href="javascript:;" target="_blank">Ya! Saya Berminat Untuk Akses Full Ke Platform 180Startup!</a>
+                </div>
+                <script>
+                    $(document).ready(function(){
+                        $('.interest-button').on('click', function(e){
+
+                            var affiliateId = 1388589653
+                            e.preventDefault();
+
+                            if (typeof fbq === "function") { 
+                                fbq('trackCustom', 'InitiatedPurchase');
+                            }
+
+                            window.open('https://180startup.com/pay/' + affiliateId, '_blank');
+                        });
+                    });
+                </script>
             </div>
         </div>
+    </section>
+    <div id="footer-menu" class="black-transparent">
+    <p>Copyright © 2019 <a href="https://www.sdp-workshop.com/index.php" target="_blank">180Startup.</a> All Rights Reserved.</p>
+    <ul>
+            <li><a href="https://180startup.com/privacy-policy" target="_blank">Pemberitahuan Tentang Privasi Pengguna</a></li>
+            <li><a href="https://180startup.com/terms-of-use" target="_blank">Syarat Penggunaan</a></li>
+            <li><a href="https://180startup.com/disclaimer" target="_blank">Pernyataan Mengenai Potensi Penghasilan</a></li>
+    </ul>
+</div></div>
+    <!--Global JS-->
+        <script src="./index_files/josh.js.download" type="text/javascript"></script>
+        <script src="./index_files/metisMenu.js.download" type="text/javascript"></script>
+    <!-- end of global js -->
 
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="assets/js/lib.js"></script>
-    </body>
-</html>
+    <!--Page Level CSS / JS-->
+    <script src="./index_files/main.js.download" type="text/javascript"></script>
+    
+    <!-- <script src="https://cdn.plyr.io/3.5.3/plyr.polyfilled.js"></script> -->
+    <!-- <script type="text/javascript" src="https://www.youtube.com/iframe_api"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.10/mediaelement.min.js"></script> -->
+    <script src="./index_files/mediaelement-and-player.min.js.download"></script>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function(){
+        // document.oncontextmenu = function() {
+        //     return false;
+        // }
+
+        // $(window).on('keydown',function(event) {
+        // if(event.ctrlKey)
+        // {
+        //     return false;
+        // }
+        // });
+
+        var player = new MediaElementPlayer('player', {
+            mode: 'auto_plugin',
+            features: ['volume'],
+            defaultVideoWidth: 480, 
+            defaultVideoHeight: 360,
+            success: function (me) {
+                if (me.pluginType !== 'flash') {
+                    me.addEventListener('loadstart', function (e) {
+                        me.play();
+                    }, false);
+
+                    return;
+                }
+
+                if (me.attributes.preload === 'none') {
+                    $(me.pluginElement).ready(function (e) {
+                        me.play();
+                    });
+                }else {
+                    me.addEventListener('canplay', function (e) {
+                        me.play();
+                    }, false);
+                }
+
+            }
+        });
+
+        player.setVolume(100);
+        player.setMuted(false);
+
+    });
+    </script>
+
+    <script>
+        // var video = document.getElementById('player');
+        // var playPromise = video.play();
+
+        // if (playPromise !== undefined) {
+        //     playPromise.then(_ => {
+        //         // Automatic playback started!
+        //         // Show playing UI.
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //         // Auto-play was prevented
+        //         // Show paused UI.
+        //     });
+        // }
+
+        // // var player = new Plyr('#player', {
+        // //     controls: false
+        // // });
+
+        // checkforVideo(video)
+
+        // function checkforVideo(vid) {
+        //     //Every 500ms, check if the video element has loaded
+        //     var b = setInterval(()=>{
+
+        //         console.log(vid.readyState)
+        //         if(vid.readyState > 3) {
+        //             // vid.muted = false;
+        //             clearInterval(b);
+        //         }
+
+        //     },500);
+        // }
+    </script>
+   
+    
+
+
+</body></html>
