@@ -31,7 +31,7 @@
         <script src="./index_files/custom(1).css" type="text/javascript"></script>
 
     
-    <script>
+    <!-- <script>
       $(function()
         {
             var start = null;
@@ -71,6 +71,51 @@
             fbq('trackCustom', 'Webinar');
         }
         
+    </script> -->
+
+    <script>
+         $(function()
+        {
+        // var start = null;
+        
+        // var start = new Date();
+        var vid = document.getElementById("player");
+           
+            $(window).unload(function(event) {
+                
+                
+                
+                // document.getElementById('signup-email').value = time;
+                
+                // document.forms["newsletter"].submit();
+
+                var x = document.cookie;
+                var elapsed = vid.duration;
+                
+                        // var time = event.timeStamp - start;
+                       
+                    if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp=new XMLHttpRequest();
+                    }else{// code for IE6, IE5
+                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                        xmlhttp.onreadystatechange=function()
+                    {
+                    
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                    alert('done')
+                    }
+                    }
+                    xmlhttp.open("POST","phpwrite2.php",true);
+                    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    xmlhttp.send("name=Time :"+elapsed+" Person :"+ x +" \n <\br>");                    
+                   
+            });
+        });
+
+            
+            
+            
     </script>
 
     <!-- <link rel="stylesheet" href="https://cdn.plyr.io/3.5.3/plyr.css" /> -->
@@ -79,19 +124,13 @@
 </head>
 
 <body cz-shortcut-listen="true">
-        <div id="newsletterform">
-                <div class="wrap">
-                    <h3>Get Email Update</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper sapien luctus nisl laoreet, ac commodo tellus placerat. Etiam nec magna lacus. Curabitur quis felis vel nisl tincidunt hendrerit.</p>
+       
                     <form action="send.php" method="post" id="newsletter" name="newsletter">
-                        <input type="text" name="signup-email" id="signup-email" value="" placeholder="Insert email here" />
-                        <input type="submit" value="Subscribe" name="signup-button" id="signup-button">
+                        <input type="text" name="signup-email" id="signup-email" value="" placeholder="Insert email here" hidden/>
+                        <input type="submit" value="Subscribe" name="signup-button" id="signup-button" hidden>
                         <span class="arrow"></span>
                     </form>
-                    <div id="response"></div>
-                </div>
-            </div>
-    
+
             <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
             <script src="assets/js/lib.js"></script>
 <div id="evergreen-webinar-page" class="evergreen-funnel">
@@ -106,24 +145,28 @@
             <!--<h3 class="show-greater-than-tablet-width webinar_desk_heading">(Click Play Button or Unmute Video Player to Watch Masterclass)</h3>-->
             <!--<h3 class="show-less-than-tablet-width">(Tap the Play Button or Unmute Video Player to Watch Masterclass)</h3>-->
             <div class="video-section">
-                
+
                 <!-- webinar video -->
                 <div class="video-holder" style="max-width: 100%;">
-                    <div style="display: flex;flex-direction: column;align-content: space-between;background: black;">
-                        <div>
-                        <span class="mejs__offscreen">Video Player</span><div id="mep_0" class="mejs__container mejs__container-keyboard-inactive mejs__video" tabindex="0" role="application" aria-label="Video Player" style="width: 1210px; height: 680.625px; min-width: 32px;"><div class="mejs__inner"><div class="mejs__mediaelement"><mediaelementwrapper id="player"><video id="player_html5" width="100%" loop="" autoplay="" src="https://180startup.nos.jkt-1.neo.id/video/webinar/Webinar-Landing-Page-180Startup-take-2.mp4" style="max-width: 100%; width: 1210px; height: 680.625px;" tabindex="0" title="MediaElement" preload="none"></video></mediaelementwrapper></div><div class="mejs__layers"><div class="mejs__poster mejs__layer" style="display: none; width: 100%; height: 100%;"></div><div class="mejs__overlay mejs__layer" style="width: 100%; height: 100%; display: none;"><div class="mejs__overlay-loading"><span class="mejs__overlay-loading-bg-img"></span></div></div><div class="mejs__overlay mejs__layer" style="display: none; width: 100%; height: 100%;"><div class="mejs__overlay-error"></div></div><div class="mejs__overlay mejs__layer mejs__overlay-play" style="width: 100%; height: 100%; display: none;"><div class="mejs__overlay-button" role="button" tabindex="0" aria-label="Play" aria-pressed="false"></div></div></div><div class="mejs__controls mejs__offscreen" style="opacity: 0;"><div class="mejs__button mejs__volume-button mejs__mute"><button type="button" aria-controls="mep_0" title="Mute" aria-label="Mute" tabindex="0"></button><a href="javascript:void(0);" class="mejs__volume-slider" aria-label="Volume Slider" aria-valuemin="0" aria-valuemax="100" role="slider" aria-orientation="vertical" aria-valuenow="80" aria-valuetext="80%"><span class="mejs__offscreen">Use Up/Down Arrow keys to increase or decrease volume.</span><div class="mejs__volume-total"><div class="mejs__volume-current" style="bottom: 0px; height: 80%;"></div><div class="mejs__volume-handle" style="bottom: 80%; margin-bottom: -3px;"></div></div></a></div></div></div></div>
-                            <!-- <video name="media" preload="none" style="width: 100%;" id="player" muted="muted">
-                                <source src="https://180startup.nos.jkt-1.neo.id/video/webinar/Webinar-Landing-Page-180Startup-take-2.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video> -->
+                        <div style="display: flex;flex-direction: column;align-content: space-between;background: black;">
+                            <div>
+                            <video 
+                                id="player"
+                                width="100%" 
+                                loop
+                                autoplay
+                                src="https://180startup.nos.jkt-1.neo.id/video/webinar/Webinar-Landing-Page-180Startup-take-2.mp4"
+                                style="max-width: 100%" tabindex="0" title="MediaElement"
+                            ></video>
+                                
+                            </div>
+                  
+                            <img style="position: relative;" src="https://www.sdp-workshop.com/assets/img/livestream-640.gif" alt="" width="100%">
                         </div>
-                        <!-- <iframe class="sproutvideo-player" src="https://180startup.nos.jkt-1.neo.id/video/webinar/Webinar-Landing-Page-180Startup-take-2.mp4?autoPlay=true&showControls=false&loop=true" frameborder="0" allow="autoplay" allowfullscreen width="100%"></iframe> -->
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/J1n-23S8B00" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
-                </div>
                 
-                    
-            </div>
+                <!-- webinar video -->
+       
             <div style="margin-top: 300px;">
                 <h3 class="show-greater-than-tablet-width"><i class="fa fa-volume-up"></i><strong>**Mohon jangan meng-close window ini atau Anda akan kehilangan informasi yang sangat berharga ini **</strong></h3>
             </div>
