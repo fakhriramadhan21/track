@@ -11,4 +11,5 @@ if ($stringData <> "")
 // $stringData = $_POST["name"];
 // fwrite($fh, $stringData."\n");
 fclose($fh);
+unset($_COOKIE["visitor_id"]);
 ?>  
